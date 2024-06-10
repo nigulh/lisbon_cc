@@ -5,7 +5,7 @@ mkdir even
 cp -r input even/
 for file in $(ls input/*/*.pdf); do
     echo "start $file"
-    remainder=$(gs -q -dNOSAFER -dNODISPLAY -c "($file) (r) file runpdfbegin pdfpagecount = quit")
+    remainder=$(gs  --permit-file-read="$file" -q -dNOSAFER -dNODISPLAY -c "($file) (r) file runpdfbegin pdfpagecount = quit")
     modulo=$(( $remainder % 2 ))
     if [ $modulo = "1" ]; then
         echo "Add to $file"
